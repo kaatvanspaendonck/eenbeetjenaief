@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>  </title>
+
+  <style>
+
+  body, html {
+ background-image: url("images/poster-h7.jpeg");
+  background-size: cover;
+  background-position: center;
+
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
+ /* 🟢 VIDEO ACHTERGROND */
+  .achtergrond-video {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.9;
+  }
+
+
+.nav {
+    position: fixed;
+    top: 2%;
+    z-index: 3;
+}
+
+.dot {
+  color: aquamarine;
+  text-shadow: 2px 2px olive;
+    text-decoration: none;
+    left: 5%;
+}
+
+.dot:hover{
+ color: olive;
+ text-shadow: 2px 2px 4px aquamarine;
+}
+
+.menu {
+  margin-left: 40%;
+}
+
+.menu a {
+  color: aquamarine;
+  text-shadow: 2px 2px olive;
+  text-decoration: none;
+  font-weight: bold;
+  font-style: italic;
+}
+
+   .menu :hover {
+   color: olive;
+   text-shadow: 2px 2px 4px aquamarine;
+ }
+
+
+.scene{ 
+   position: fixed;
+   inset: 0;
+   z-index: 2;
+  }
+
+ .textbox {
+    position: absolute;
+
+    max-width: 30rem;
+
+    padding: 1rem;
+    border-radius: 12px;
+
+    z-index: 2;
+}
+
+.left {
+    left: 5%;
+    bottom: 5%;
+    color: black;
+    text-shadow: 1px 1px 4px whitesmoke;
+
+}
+
+.right {
+    right: 10%;
+    bottom: 60%;
+    color: whitesmoke;
+    text-shadow: 1px 1px 4px aquamarine;
+}
+
+  .info {
+  position: fixed;
+  z-index: 2; 
+  bottom: 20px;
+  right: 20px;
+
+  background: none;
+  color: aquamarine;
+
+  border: 2px solid aquamarine;
+
+  padding: 10px 14px;
+
+  text-decoration: none;
+
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 18px;
+
+  text-transform: uppercase;
+
+  image-rendering: pixelated;
+}
+
+.info:hover {
+  background: aquamarine;
+  color: olive;
+}
+
+ </style>
+</head>
+
+<body>
+
+
+<video autoplay muted class="achtergrond-video" id="bgVideo">
+              <source src="images/7.mp4" type="video/mp4">
+            </video>
+
+
+<a href="index.html" class="nav dot">●</a>
+
+<div class="nav menu">
+  <a href="info.html">> > ></a>
+</div>
+
+
+<div class="scene">
+  <div class="textbox left">
+  <p id="typing_1"></p>
+</div>
+
+<div class="textbox right">
+  <p id="typing_2"></p>
+</div>
+
+     <a class="info" href="pagina-8.html">
+           <span class="question">?</span>
+          </a>
+
+
+   <script>
+/* =========================
+   TYPEWRITER ENGINE
+========================= */
+
+function typeText(elementId, texts, speed = 50, delay = 500, callback) {
+  let line = 0;
+  let char = 0;
+  const el = document.getElementById(elementId);
+
+  if (!el) return;
+
+  function type() {
+    if (line < texts.length) {
+      if (char < texts[line].length) {
+        el.innerHTML += texts[line].charAt(char);
+        char++;
+        setTimeout(type, speed);
+      } else {
+        el.innerHTML += "<br>";
+        line++;
+        char = 0;
+        setTimeout(type, delay);
+      }
+    } else if (callback) {
+      callback();
+    }
+  }
+
+  type();
+}
+
+/* =========================
+   INTERLEAVED SCHEDULER
+========================= */
+
+function runSteps(steps) {
+  let i = 0;
+
+  function next() {
+    if (i >= steps.length) return;
+
+    const step = steps[i];
+    i++;
+
+    typeText(step.id, [step.text], 50, 300, next);
+  }
+
+  next();
+}
+
+/* =========================
+   START
+========================= */
+
+window.addEventListener("DOMContentLoaded", function () {
+
+  const steps = [
+    { id: "typing_1", text: "Naïef is ongeschonden. Er wordt vaak op neergekeken maar dat vind ik niet terecht. Het is het goede willen zien, het mooie willen zien," },
+    { id: "typing_1", text: "zonder heel de tijd te moeten berekenen wat het effect is, hoe je potentieel schade kan toebrengen. En of het wel veilig is." },
+    { id: "typing_2", text: "Het is toch juist een luxe, als je naïef kan zijn." },
+    { id: "typing_1", text: "Ja, een luxe." },
+    { id: "typing_1", text: "En iets wat je mensen gunt. Dat ze onberekenend denken en ervaren." },
+    { id: "typing_2", text: "Denk jij dat je naïef bent?" },
+    { id: "typing_1", text: "Ja. Nee. Ik wil het denk ik graag zijn. Ik vind het toch een beetje arrogant om mensen naïef te noemen." },
+    { id: "typing_2", text: "Hoezo?" },
+    { id: "typing_2", text: "Dan vind je het dus toch iets negatiefs. " },
+    { id: "typing_1", text: "Omdat het zo klinkt van, let maar op, wacht maar. Jij weet dit nog niet." }
+
+  ];
+
+   runSteps(steps);
+
+});
+
+ /* =========================
+   POSTER IMAGE 
+========================= */
+
+const video = document.getElementById("bgVideo");
+
+video.addEventListener("ended", () => {
+  video.style.display = "none";
+});
+
+
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+  <title> index </title>
+
+ 
+
+<style>
+
+body, html {
+  background-image: url("images/poster-5.jpeg");
+  background-size: cover;
+  background-position: center;
+
+
+   margin: 0;
+   padding: 0;
+   height: 100%;
+   overflow: hidden;
+}
+
+.achtergrond-video{
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+
+}
+
+.nav {
+    position: fixed;
+    top: 2%;
+    z-index: 2;
+}
+
+.dot {
+  color: magenta;
+  text-shadow: 2px 2px whitesmoke;
+    text-decoration: none;
+    left: 5%;
+}
+
+.dot:hover{
+  color: whitesmoke;
+  text-shadow: 2px 2px 4px magenta;
+}
+
+ .menu {
+  margin-left: 25%;
+}
+
+.menu a {
+  color: magenta;
+  text-shadow: 2px 2px whitesmoke;
+  text-decoration: none;
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+.menu :hover{
+  color: whitesmoke;
+  text-shadow: 2px 2px 4px magenta;
+  }
+
+
+
+  .scene{ 
+   position: fixed;
+   inset: 0;
+  }
+
+
+  .textbox {
+    position: absolute;
+    max-width: 40vw;
+    padding: 1rem;
+
+    display: inline-block;
+    width: fit-content;
+}
+
+.left {
+    left: 15%;
+    bottom: 5%;
+    width: 75vw;
+    max-width: 400px;
+    color: whitesmoke;
+    text-shadow: 1px 1px 4px violet;
+}
+
+.right {
+    left: 5%;
+    top: 8%;
+    width: 60vw;
+    max-width: 700px;
+    color: black;
+    text-shadow: 1px 1px 4px whitesmoke;
+}
+
+  .info {
+  position: fixed;
+  z-index: 2;
+  bottom: 20px;
+  right: 20px;
+
+  background: none;
+  color: magenta;
+
+  border: 2px solid magenta;
+
+  padding: 10px 14px;
+
+  text-decoration: none;
+
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 18px;
+
+  text-transform: uppercase;
+
+  image-rendering: pixelated;
+}
+
+.info:hover {
+  background: magenta;
+  color: whitesmoke;;
+}
+
+
+</style>
+
+
+
+<body>
+
+<video autoplay muted class="achtergrond-video" id="bgVideo">
+              <source src="images/4.mp4" type="video/mp4">
+            </video>
+
+<a href="index.html" class="nav dot">●</a>
+
+<div class="nav menu">
+  <a href="pagina-5.html">> > ></a>
+</div>
+
+
+<div class="scene">
+  <div class="textbox right">
+  <p id="typing_1"></p>
+</div>
+
+<div class="textbox left">
+  <p id="typing_2"></p>
+</div>
+
+</div>
+
+     <a class="info" href="info.html">
+           <span class="question">?</span>
+          </a>
+
+
+   <script>
+/* =========================
+   TYPEWRITER ENGINE
+========================= */
+
+function typeText(elementId, texts, speed = 50, delay = 500, callback) {
+  let line = 0;
+  let char = 0;
+  const el = document.getElementById(elementId);
+
+  if (!el) return;
+
+  function type() {
+    if (line < texts.length) {
+      if (char < texts[line].length) {
+        el.innerHTML += texts[line].charAt(char);
+        char++;
+        setTimeout(type, speed);
+      } else {
+        el.innerHTML += "<br>";
+        line++;
+        char = 0;
+        setTimeout(type, delay);
+      }
+    } else if (callback) {
+      callback();
+    }
+  }
+
+  type();
+}
+
+/* =========================
+   INTERLEAVED SCHEDULER
+========================= */
+
+function runSteps(steps) {
+  let i = 0;
+
+  function next() {
+    if (i >= steps.length) return;
+
+    const step = steps[i];
+    i++;
+
+    typeText(step.id, [step.text], 50, 300, next);
+  }
+
+  next();
+}
+
+/* =========================
+   START
+========================= */
+
+window.addEventListener("DOMContentLoaded", function () {
+
+  const steps = [
+    { id: "typing_1", text: "Ik ken geen vrouwen die niet op een manier conformeren aan patriarchaal gedachtegoed. En ik ga toch wel om met een groep vrouwen die ik zou beschouwen als heel feministisch. In ieder geval meer dan gemiddeld." },
+    { id: "typing_1", text: "Maar het kan niet zomaar, eruit breken." },
+    { id: "typing_1", text: "En wat ik voor mezelf heel belangrijk vind is dat iedereen in ieder geval op een manier kan toegeven dat ze bepaald gedrag vertonen omdat dat nou eenmaal is hoe ze zijn geïndoctrineerd. Ik vind het een stuk bevrijdender als een vrouw kan toegeven van, ik scheer mijn benen, ja helaas ben ik geïndoctrineerd, dan als ze zeggen, ik scheer mijn benen omdat ik dat fijn vind." },
+    { id: "typing_1", text: "Fuck het keuzefeminisme." },
+    { id: "typing_1", text: "Je bent toch een product van de samenleving. Ik vind het snappen van wat is er precies aan de hand is, en dat mensen ook kritisch naar zichzelf durven kijken heel belangrijk. En dat je kunt zeggen: dit doe ik ook fout, en ik ben me daar van bewust, en ik probeer het beter te doen." },
+    { id: "typing_2", text: "Maar vind je dan dat mensen daar vaak niet eerlijk over zijn?" },
+    { id: "typing_1", text: "Nee. En daar ben ik het gewoon niet mee eens. Want ik vind gewoon dat we we elkaar wel verantwoordelijk moeten houden voor dingen." },
+    { id: "typing_1", text: "Je moet jezelf kwetsbaar kunnen opstellen, en ja het is jammer dat dat gepaard gaat met een bepaalde mate van achterdocht."},
+    { id: "typing_1", text: "Tja." }
+  ];
+
+  const video = document.getElementById("bgVideo");
+
+  video.addEventListener("ended", () => {
+    video.style.display = "none";
+    runSteps(steps);
+  });
+
+});
+
+  </script>
+
+  </body>
+
+
+
+
+
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>index</title>
+
+  <style>
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .achtergrond-afbeelding {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .achtergrond-afbeelding img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.9;
+  }
+
+  .menu,
+  .tekst_1,
+  .tekst_2 {
+    position: relative;
+    z-index: 2;
+  }
+
+  .menu,
+  .menu a {
+    margin-top: 2%;
+    display: flex;
+    margin-left: 60%; 
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: none;
+    color: rgb(183, 213, 93);
+    text-shadow: 2px 2px red;
+    gap: 10em;
+  }
+
+.tekst_1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 120px;
+    margin-right: 800px;
+    color: black;
+  }
+
+  .tekst_2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 40px;
+    margin-right: 100px;
+    color: black;
+  }
+
+ </style>
+
+ </head>
+
+<body>
+
+<div class="menu">
+
+  <a href="info.html"> menu > </a>
+
+</div>
+
+</div>
+
+<div class="achtergrond-afbeelding">
+</div>
+
+<div class="tekst_1">
+  <p id="typing_1"></p>
+</div>
+
+<div class="tekst_2">
+  <p id="typing_2"></p>
+</div>
+
+
+   <script>
+/* =========================
+   TYPEWRITER ENGINE
+========================= */
+
+function typeText(elementId, texts, speed = 50, delay = 500, callback) {
+  let line = 0;
+  let char = 0;
+  const el = document.getElementById(elementId);
+
+  if (!el) return;
+
+  function type() {
+    if (line < texts.length) {
+      if (char < texts[line].length) {
+        el.innerHTML += texts[line].charAt(char);
+        char++;
+        setTimeout(type, speed);
+      } else {
+        el.innerHTML += "<br>";
+        line++;
+        char = 0;
+        setTimeout(type, delay);
+      }
+    } else if (callback) {
+      callback();
+    }
+  }
+
+  type();
+}
+
+/* =========================
+   INTERLEAVED SCHEDULER
+========================= */
+
+function runSteps(steps) {
+  let i = 0;
+
+  function next() {
+    if (i >= steps.length) return;
+
+    const step = steps[i];
+    i++;
+
+    typeText(step.id, [step.text], 50, 300, next);
+  }
+
+  next();
+}
+
+/* =========================
+   START
+========================= */
+
+window.addEventListener("DOMContentLoaded", function () {
+
+  const steps = [
+    { id: "typing_1", text: "..." },
+    { id: "typing_2", text: "..." },
+    { id: "typing_1", text: "..." },
+    { id: "typing_1", text: "..." }
+  ];
+
+  runSteps(steps);
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>  </title>
+
+  <style>
+
+  body, html {
+  background-image: url("images/vlechten123.jpeg");
+  background-size: cover;
+  background-position: center;
+
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* 🟢 AFBEELDING ACHTERGROND */
+  .achtergrond-afbeelding {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .achtergrond-afbeelding img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.9;
+  }
+
+  .achtergrond-video{
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+
+  pointer-events: none;
+
+}
+
+.nav {
+    position: fixed;
+    top: 2%;
+    z-index: 3;
+}
+
+.dot {
+    color: rgb(183, 213, 93);
+    text-shadow: 2px 2px red;
+    text-decoration: none;
+    left: 5%;
+}
+
+.dot:hover{
+  color: red;
+  text-shadow: 2px 2px 4px rgb(183, 213, 93);
+}
+
+   .menu {
+  margin-left: 35%;
+}
+
+.menu a {
+  color: rgb(183, 213, 93);
+  text-shadow: 2px 2px red;
+  text-decoration: none;
+  font-weight: bold;
+  font-style: italic;
+}
+
+   .menu :hover {
+    color: red;
+    text-shadow: 2px 2px 4px rgb(183, 213, 93);
+ }
+
+
+ .scene{ 
+   position: fixed;
+   inset: 0;
+   z-index: 2;
+  }
+
+ .textbox {
+    position: absolute;
+
+    max-width: 30rem;
+
+    padding: 1rem;
+    border-radius: 12px;
+
+    z-index: 2;
+}
+
+.left {
+    left: 8%;
+    bottom: 50%;
+    color: whitesmoke;
+    text-shadow: 1px 1px 4px brown;
+
+}
+
+.right {
+    right: 10%;
+    bottom: 20%;
+    color: whitesmoke;
+    text-shadow: 1px 1px 4px violet;
+}
+
+
+  .info {
+  position: fixed;
+  z-index: 2;
+  bottom: 20px;
+  right: 20px;
+
+  background: none;
+   color: rgb(183, 213, 93);
+
+  border: 2px solid rgb(183, 213, 93);
+
+  padding: 10px 14px;
+
+  text-decoration: none;
+
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 18px;
+
+  text-transform: uppercase;
+
+  image-rendering: pixelated;
+}
+
+.info:hover {
+ background: rgb(183, 213, 93);
+  color: red;
+}
+
+
+ </style>
+</head>
+
+<body>
+
+<video autoplay muted class="achtergrond-video" id="bgVideo"> 
+      <source src="images/6.mp4" type="video/mp4">
+  </video>
+
+<a href="index.html" class="nav dot">●</a>
+
+<div class="nav menu">
+  <a href="pagina-7.html">> > ></a>
+</div>
+
+
+<div class="scene">
+  <div class="textbox right">
+  <p id="typing_1"></p>
+</div>
+
+<div class="textbox left">
+  <p id="typing_2"></p>
+</div>
+</div>
+
+     <a class="info" href="info.html">
+           <span class="question">?</span>
+          </a>
+
+
+   <script>
+/* =========================
+   TYPEWRITER ENGINE
+========================= */
+
+function typeText(elementId, texts, speed = 50, delay = 500, callback) {
+  let line = 0;
+  let char = 0;
+  const el = document.getElementById(elementId);
+
+  if (!el) return;
+
+  function type() {
+    if (line < texts.length) {
+      if (char < texts[line].length) {
+        el.innerHTML += texts[line].charAt(char);
+        char++;
+        setTimeout(type, speed);
+      } else {
+        el.innerHTML += "<br>";
+        line++;
+        char = 0;
+        setTimeout(type, delay);
+      }
+    } else if (callback) {
+      callback();
+    }
+  }
+
+  type();
+}
+
+/* =========================
+   INTERLEAVED SCHEDULER
+========================= */
+
+function runSteps(steps) {
+  let i = 0;
+
+  function next() {
+    if (i >= steps.length) return;
+
+    const step = steps[i];
+    i++;
+
+    typeText(step.id, [step.text], 50, 300, next);
+  }
+
+  next();
+}
+
+/* =========================
+   START
+========================= */
+
+window.addEventListener("DOMContentLoaded", function () {
+
+  const steps = [
+    { id: "typing_1", text: "Misschien is het allemaal niet zo diep. Is er ondertussen niet genoeg over geschreven, nagedacht, gemaakt? Misschien is het ook een beetje klaar, op een gegeven moment. Dat we het allemaal niet groter hoeven te maken dan dat het is." },
+    { id: "typing_2", text: "Maar is het groter dan het is, als je juist in die nuance gaat kijken, in de oppervlakkigheid? Je impliceert heel erg een tweestelling, tussen iets is diep en heftig en belangrijk of iets boeit niet. Dat vind ik ook een hele mannelijke manier van ernaar kijken. Uiteindelijk wil je toch in die lijntjes ertussen gaan onderzoeken, naar ervaringen enzo." },
+    { id: "typing_1", text: "Dat is denk ik wat ik hier doe." },
+    { id: "typing_1", text: "Maar jij denkt nooit van, ik ben klaar met hier allemaal over nadenken?" },
+    { id: "typing_2", text: "Ja zeker! Duh!" },
+    { id: "typing_2", text: "Maar dan denk ik er gewoon even niet over na." },
+    { id: "typing_2", text: "Weet ik veel." },
+    { id: "typing_1", text: "Waar ben je dan klaar mee?" },
+    { id: "typing_2", text: "Met heel de tijd nadenken over hoe ik overkom. Maar ik denk wel dat het belangrijk is dat we er allemaal over blijven nadenken. Dat klinkt zo VPRO-achtig. Het is belangrijk dat we allemaal nadenken over dit is deze kwestie en dat we hier ons allemaal bewust zijn van deze invloed in de maatschappij." },
+    { id: "typing_2", text: "We moeten wel het gesprek openhouden." }
+
+  ];
+
+  runSteps(steps);
+
+});
+
+ /* =========================
+   POSTER IMAGE 
+========================= */
+
+const video = document.getElementById("bgVideo");
+
+video.addEventListener("ended", () => {
+  video.style.display = "none";
+});
+
+</script>
+
+
+
+
+</body>
+</html>

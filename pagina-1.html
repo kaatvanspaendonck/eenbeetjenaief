@@ -1,0 +1,230 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+  <title> index </title>
+
+<style>
+
+body, html {
+  background-image: url("images/beenhaar.jpeg");
+  background-size: cover;
+  background-position: center;
+
+   margin: 0;
+   padding: 0;
+   height: 100%;
+   overflow: hidden;
+
+}
+
+.nav {
+    position: fixed;
+    top: 2%;
+    z-index: 2;
+}
+
+.dot {
+    color: rgb(183, 213, 93);
+    text-shadow: 2px 2px red;
+    text-decoration: none;
+    left: 5%;
+}
+
+.dot:hover{
+  color: red;
+  text-shadow: 2px 2px 4px rgb(183, 213, 93);
+}
+
+.menu {
+    left: 10%;
+
+    font-family: inherit;
+    font-size: 16px;
+
+    z-index: 2;
+}
+
+.menu a {
+  color: rgb(183, 213, 93);
+  text-shadow: 2px 2px red;
+  text-decoration: none;
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+  .menu :hover{
+    color: red;
+    text-shadow: 2px 2px 4px rgb(183, 213, 93);
+  }
+
+    .scene{ 
+   position: fixed;
+   inset: 0;
+  }
+
+ .textbox {
+    position: absolute;
+
+    max-width: 30rem;
+
+    padding: 1rem;
+    border-radius: 12px;
+
+    z-index: 2;
+}
+
+.left {
+    left: 8%;
+    bottom: 15%;
+    color: whitesmoke;
+    text-shadow: 1px 1px 4px aquamarine;
+
+}
+
+.right {
+    right: 10%;
+    top: 20%;
+    color: blue;
+    text-shadow: 1px 1px 4px whitesmoke;
+}
+
+  .info {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  background: none;
+  color: rgb(183, 213, 93);
+
+  border: 2px solid  rgb(183, 213, 93);
+
+  padding: 10px 14px;
+
+  text-decoration: none;
+
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 18px;
+
+  text-transform: uppercase;
+
+  image-rendering: pixelated;
+}
+
+.info:hover {
+    background: rgb(183, 213, 93);
+  color: red;
+}
+
+
+</style>
+
+ </head>
+
+<body>
+
+<a href="index.html" class="nav dot">●</a>
+
+<div class="nav menu">
+  <a href="pagina-2.html">> > ></a>
+</div>
+
+<div class="scene">
+  <div class="textbox left">
+  <p id="typing_1"></p>
+</div>
+
+<div class="textbox right">
+  <p id="typing_2"></p>
+</div>
+
+</div>
+     <a class="info" href="info.html">
+           <span class="question">?</span>
+          </a>
+
+  <script>
+/* =========================
+   TYPEWRITER ENGINE
+========================= */
+
+function typeText(elementId, texts, speed = 50, delay = 500, callback) {
+  let line = 0;
+  let char = 0;
+  const el = document.getElementById(elementId);
+
+  if (!el) return;
+
+  function type() {
+    if (line < texts.length) {
+      if (char < texts[line].length) {
+        el.innerHTML += texts[line].charAt(char);
+        char++;
+        setTimeout(type, speed);
+      } else {
+        el.innerHTML += "<br>";
+        line++;
+        char = 0;
+        setTimeout(type, delay);
+      }
+    } else if (callback) {
+      callback();
+    }
+  }
+
+  type();
+}
+
+/* =========================
+   INTERLEAVED SCHEDULER
+========================= */
+
+function runSteps(steps) {
+  let i = 0;
+
+  function next() {
+    if (i >= steps.length) return;
+
+    const step = steps[i];
+    i++;
+
+    typeText(step.id, [step.text], 50, 300, next);
+  }
+
+  next();
+}
+
+/* =========================
+   START
+========================= */
+
+window.addEventListener("DOMContentLoaded", function () {
+
+  const steps = [
+    { id: "typing_1", text: "Dat ik oksels niet scheren wilde uitproberen was ook om het accepteren van jezelf, dat dierlijke deel. Maar waar ik tegenaan liep was dat ik ook dacht, waarom doe je het één wel en het ander niet? 	Waarom draag je wel make-up en wil je je oksels niet scheren? En als je dan geen make-up draagt, waarom heb je dan wel piercings en oorbellen? Waarom zou je überhaupt nog moeite in je uiterlijk stoppen?" },
+    { id: "typing_2", text: "Waarom stink je niet gewoon?" },
+    { id: "typing_1", text: "Ja, waarom stink je niet gewoon en loop je niet gewoon in je pyjama?" },
+    { id: "typing_1", text: "Waarom zou je een vraagteken zetten bij het één, en niet bij het ander? Ik denk wel dat het helpt, nu dat het zomer wordt. Als ik geen zin heb om me te scheren ga ik niet meer mijn jas de hele dag aanhouden omdat ik mijn oksels niet heb geschoren." },
+    { id: "typing_2", text: "Ik was vergeten dat mensen dat deden. Dan ben je toch echt gebrainwasht. Maar dat kan je inderdaad over alles zeggen." },
+    { id: "typing_1", text: "Ik denk dat je er niet aan ontsnapt. Het is ook wel lekker om erin mee te gaan en gewoon onzichtbaar te zijn, als je dat niet doet, dan is het meteen een statement. Als je geen statement wilt maken moet je meedoen. Het wordt daarmee ook een beetje een interne strijd." },
+    { id: "typing_2", text: "Grappig dat je dat zegt. Voor mijn gevoel verdedig ik juist altijd de positie van uit gemak meedoen met de status quo in jullie gezelschap. En dat jullie je daar altijd meer tegen verzetten." }
+  ];
+
+  runSteps(steps);
+
+});
+
+</script>
+
+  </body>
+
+
+
+
+
+</html>

@@ -1,0 +1,235 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title> index </title>
+
+ 
+
+<style>
+
+body, html {
+background-image: url("images/uitkleden_2.jpg");
+background-size: cover;
+background-position: center;
+
+   margin: 0;
+   padding: 0;
+   height: 100%;
+   overflow: hidden;
+
+}
+
+.nav {
+    position: fixed;
+    top: 2%;
+    z-index: 2;
+}
+
+.dot {
+  color: magenta;
+  text-shadow: 2px 2px whitesmoke;
+    text-decoration: none;
+    left: 5%;
+}
+
+.dot:hover{
+  color: whitesmoke;
+  text-shadow: 2px 2px 4px magenta;
+}
+
+ .menu {
+  margin-left: 20%;
+}
+
+.menu a {
+   color: magenta;
+  text-shadow: 2px 2px whitesmoke;
+  text-decoration: none;
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+  .menu :hover{
+  color: whitesmoke;
+  text-shadow: 2px 2px 4px magenta;
+  }
+
+  .scene{ 
+   position: fixed;
+   inset: 0;
+  }
+
+
+  .textbox {
+    position: absolute;
+    max-width: 40vw;
+    padding: 1rem;
+
+    display: inline-block;
+    width: fit-content;
+}
+
+.left {
+    left: 15%;
+    bottom: 15%;
+    width: 75vw;
+    max-width: 400px;
+    color: whitesmoke;
+    text-shadow: 1px 1px 4px violet;
+}
+
+.right {
+    right: 5%;
+    top: 20%;
+    width: 20vw;
+    max-width: 700px;
+    color: brown;
+    text-shadow: 1px 1px 4px whitesmoke;
+}
+
+.info {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  background: none;
+  color: magenta;
+
+  border: 2px solid magenta;
+
+  padding: 10px 14px;
+
+  text-decoration: none;
+
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 18px;
+
+  text-transform: uppercase;
+
+  image-rendering: pixelated;
+}
+
+.info:hover {
+  background: whitesmoke;
+  color: magenta;
+}
+
+</style>
+
+
+
+<body>
+
+<a href="index.html" class="nav dot">●</a>
+
+<div class="nav menu">
+
+  <a href="pagina-4.html"> > > > </a>
+
+
+</div>
+
+
+<div class="scene">
+  <div class="textbox left">
+  <p id="typing_1"></p>
+</div>
+
+<div class="textbox right">
+  <p id="typing_2"></p>
+</div>
+
+</div>
+
+     <a class="info" href="info.html">
+           <span class="question">?</span>
+          </a>
+
+   <script>
+/* =========================
+   TYPEWRITER ENGINE
+========================= */
+
+function typeText(elementId, texts, speed = 50, delay = 500, callback) {
+  let line = 0;
+  let char = 0;
+  const el = document.getElementById(elementId);
+
+  if (!el) return;
+
+  function type() {
+    if (line < texts.length) {
+      if (char < texts[line].length) {
+        el.innerHTML += texts[line].charAt(char);
+        char++;
+        setTimeout(type, speed);
+      } else {
+        el.innerHTML += "<br>";
+        line++;
+        char = 0;
+        setTimeout(type, delay);
+      }
+    } else if (callback) {
+      callback();
+    }
+  }
+
+  type();
+}
+
+/* =========================
+   INTERLEAVED SCHEDULER
+========================= */
+
+function runSteps(steps) {
+  let i = 0;
+
+  function next() {
+    if (i >= steps.length) return;
+
+    const step = steps[i];
+    i++;
+
+    typeText(step.id, [step.text], 50, 300, next);
+  }
+
+  next();
+}
+
+/* =========================
+   START
+========================= */
+
+window.addEventListener("DOMContentLoaded", function () {
+
+  const steps = [
+    { id: "typing_1", text: "Maar ik denk soms wel van, waarom doe je jezelf dit aan? Of, hoezo is het zo moeilijk voor jou om je lichamelijkheid los te koppelen van hoe je bent als persoon? Dat mensen dan liever strakke dingen dragen dan iets dragen waar ze meer voordeel aan hebben in hun carrière. Dat vind ik altijd wel pijnlijk om te zien. Omdat ik mij niet kan inbeelden hoe dat voordelig zou zijn voor hun. Maar misschien dat ze dan andere dingen in hun leven hebben waardoor dat wel de meest voordelige beslissing is, ofzo." },
+    { id: "typing_1", text: "Voor vrouwen die op OnlyFans zitten is dat anders. Dat is logisch, dan is dat juist je carrière. Dan ben je goed je werk aan het doen en horen die kledingkeuzes daarbij. Dat is een exchange. Ik vind het alleen erg dat mensen zich niet van hun lichamelijkheid kunnen loskoppelen wanneer het niet in hun voordeel speelt." },
+    { id: "typing_2", text: "Maar is dat eigenlijk ook niet een fucked-up manier van ernaar kijken, dat je zelf-presentatie puur ziet als een gewin halen uit de situatie? 	Dat als je geld of aanzien kan halen uit jouw lichaam dat je het juist moet tonen, maar als je serieus wilt worden genomen, dat vooral niet moet doen? Is het lichaam niet ook juist iets waar je je comfortabel in moet voelen?" },
+    { id: "typing_1", text: "Maar we leven wel in deze maatschappij. En als ik merk dat zelfs ík daar bevooroordeeld over ben, dat ík mensen minder serieus neem als ze naakter gekleed zijn. Dus ik weet dat als ik dat al denk, dat anderen nog veel harder zo zullen denken." },
+    { id: "typing_1", text: "Het is niet dat ik verzin, dat mensen zo kijken naar het lichaam."},
+    { id: "typing_2", text: "Ja, dus dat is gewoon een hele realistische manier van kijken. Puur pragmatisch: het werkt zo, dus je moet er op zo’n manier mee omgaan dat je er het beste voor jezelf uithaalt." },
+    { id: "typing_1", text: "Ja, misschien..." },
+    { id: "typing_1", text: "Het klinkt wel heel fout als je dat zo zegt, al is het denk ik wel dat dat juist is. Het is ook niet zo zeer met voorbedachte rade." },
+     { id: "typing_1", text: "Het komt gewoon uit mijn eigen ervaring." }
+  ];
+
+  runSteps(steps);
+
+});
+
+  </script>
+
+  </body>
+
+
+
+
+
+</html>
