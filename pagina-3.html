@@ -5,6 +5,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> index </title>
 
  
@@ -222,6 +223,20 @@ window.addEventListener("DOMContentLoaded", function () {
 
   runSteps(steps);
 
+});
+
+ /* =========================
+   autoplay...
+========================= */
+
+window.addEventListener("load", () => {
+  const video = document.getElementById("bgVideo");
+
+  if (!video) return;
+
+  video.play().catch(() => {
+    console.log("Autoplay geblokkeerd");
+  });
 });
 
   </script>

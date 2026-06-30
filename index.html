@@ -172,7 +172,8 @@ height: auto;
 <body>
 
 <div class="desktop"> 
-            <video autoplay muted loop playsinline class="achtergrond-video" id="bgVideo">
+            <video autoplay muted loop playsinline  webkit-playsinline
+    preload="auto" class="achtergrond-video" id="bgVideo">
               <source src="images/bad-index.mp4" type="video/mp4">
             </video>
 
@@ -296,14 +297,18 @@ video.addEventListener("ended", () => {
   video.style.display = "none";
 });
 
-(function () {
+ /* =========================
+   POP-UP SCHERM
+========================= */
+
+window.addEventListener("DOMContentLoaded", function () {
+
   const popup = document.getElementById("mobile-popup");
   const closeBtn = document.getElementById("close-popup");
 
-  // desktop: niks doen
+  if (!popup || !closeBtn) return;
+
   const isMobile = window.matchMedia("(max-width: 768px)").matches;
-  
-  // al gesloten?
   const dismissed = localStorage.getItem("mobilePopupDismissed");
 
   if (isMobile && !dismissed) {
@@ -314,7 +319,22 @@ video.addEventListener("ended", () => {
     popup.classList.add("hidden");
     localStorage.setItem("mobilePopupDismissed", "true");
   });
-})();
+
+});
+
+ /* =========================
+   autoplay...
+========================= */
+
+window.addEventListener("load", () => {
+  const video = document.getElementById("bgVideo");
+
+  if (!video) return;
+
+  video.play().catch(() => {
+    console.log("Autoplay geblokkeerd");
+  });
+});
 
 </script>
 
