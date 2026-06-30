@@ -3,6 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>index</title>
 
   <style>
@@ -170,7 +172,7 @@ height: auto;
 <body>
 
 <div class="desktop"> 
-            <video autoplay muted class="achtergrond-video" id="bgVideo">
+            <video autoplay muted loop playsinline class="achtergrond-video" id="bgVideo">
               <source src="images/bad-index.mp4" type="video/mp4">
             </video>
 
@@ -300,7 +302,7 @@ video.addEventListener("ended", () => {
 
   // desktop: niks doen
   const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
+  
   // al gesloten?
   const dismissed = localStorage.getItem("mobilePopupDismissed");
 
